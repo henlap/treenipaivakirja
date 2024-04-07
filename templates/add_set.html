@@ -1,0 +1,16 @@
+Lisätään sarja liikkeeseen {{movement}}
+<form action="/save_set" method="POST">
+<p>
+<label for="repetitions">Toistoja:</label>
+<input type="number" id="quantity" name="quantity" min="1" max="1000">
+</p>
+<p>
+<label for="weight">Paino:</label>
+<input type="number" id="weight" name="weight" min="1" max="1000">kg
+</p>
+<p>
+<label for="rpe">Kuinka haastavalta tuntui (1-10):</label>
+<input type="number" id="rpe" name="rpe" min="1" max="10">
+</p>
+<input type="submit" value="Lisää">
+</form>

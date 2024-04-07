@@ -27,7 +27,7 @@ CREATE TABLE sets (
     id SERIAL PRIMARY KEY,
     movement_in_workout_id INTEGER REFERENCES movement_in_workout,
     repetitions INTEGER,
-    weight_used INTEGER,
+    weight INTEGER,
     rpe INTEGER
 );
 

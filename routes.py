@@ -23,14 +23,26 @@ def logout():
     users.logout()
     return redirect("/")
 
-@app.route("/new_workout")
-def new_workout():
-    return render_template("new_workout.html")
+@app.route("/select_movements")
+def select_movements():
+    return render_template("select_movements.html")
 
-@app.route("/add_new", methods=["POST"])
-def add_new():
-    workouts.add_new()
-    return redirect("/")
+@app.route("/new_workout", methods=["POST"])
+def new_workout():
+    movements = request.form.getlist("movement")
+    return render_template("new_workout.html", movements=movements)
+
+@app.route("/add_set")
+def add_set():
+    return render_template("add_set.html")
+
+@app.route("/save_set", methods=["POST"])
+def save_set():
+    #repetitions = request.form["repetitions"]
+    #weight = request.form["weight"]
+    #rpe = request.form["rpe"]
+    #workouts.save_set(movement_in_workout_id,repetitions, weight, rpe)
+    return redirect("/new_workout")
 
 @app.route("/register", methods=["GET", "POST"])
 def register():

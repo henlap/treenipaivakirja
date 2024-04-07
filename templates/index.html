@@ -1,8 +1,10 @@
 <title>Treenipäiväkirja</title>
+<h1>Treenipäiväkirja</h1>
 {% if session.user_id %}
-<h1>Tervetuloa!</h1>
-Olet kirjautunut sisään.
-<a href="/new_workout">Lisää uusi treeni</a> | <a href="/logout">Kirjaudu ulos</a>
+<h2>Tervetuloa!</h2>
+<p>Olet kirjautunut sisään.</p>
+<a href="/select_movements">Lisää uusi treeni</a> | <a href="/logout">Kirjaudu ulos</a>
+<p>Kirjattuja treenejä:</p>
 {% else %}
 <a href="/login">Kirjaudu sisään</a>
 {% endif %}
