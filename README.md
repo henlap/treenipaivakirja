@@ -15,12 +15,15 @@ Sovelluksen suunniteltuja ominaisuuksia ovat:
 Tällä hetkellä sovelluksen ominaisuuksia ovat:
 
 * Käyttäjä voi luoda uuden tunnuksen ja kirjautua sisään sekä ulos.
-* Käyttäjä voi tarkastella treenin kirjaamista ja valita muutamasta valmiiksi asetetusta liikkeestä, mitä hän on suorittanut treenissään. Huomaa, että käyttäjä ei voi vielä kirjata treenejään.
-* Siirtymällä sivulle /add_set, käyttäjä voi tarkastella alustavaa tapaa sarjojen lisäämiseen.
+* Käyttäjä voi luoda uuden treenin sekä lisätä treeniin sarjoja yllä kuvatulla tavalla, kirjaukset tallentuvat tietokantaan. Huomaa, että käyttäjällä ei ole vielä mahdollisuutta tarkastella sovelluksessa kirjaamiaan treenejä.
 
 Ohjeita sovelluksen käyttämiseen:
 
 * Käyttääksesi sovellusta sinun on kloonattava repositorio omalle tietokoneellesi.
-* Tietokoneellasi tulee olla asennettuna PostreSQL-tietokanta ja sinne tulee olla lisättynä repositoriosta löytyvän schema.sql tiedoston mukainen users-taulu. Muita tauluja ei ole vielä tarvetta lisätä.
-* Kloonatusta hakemistosta tulee löytyä Python virtuaaliympäristö sekä flask-kirjasto. Lisäksi on asennettava seuraavat kirjastot: flask-sqlalchemy ja psycopg2
-* Hakemistoon on lisättävä .env -tiedosto, jossa on määritelty tietokanta seuraavasti: DATABASE_URL=postgresql:///(lisää tietokannan nimi) sekä salainen avain: SECRET_KEY=(lisää salainen avain)
+* Hakemistoon on lisättävä .env -tiedosto, jossa on määritelty tietokanta seuraavasti: DATABASE_URL=postgresql:///(lisää tietokannan nimi tähän) sekä salainen avain: SECRET_KEY=(lisää salainen avain tähän)
+* Seuraavilla komennoilla aktivoit python-virtuaaliympäristön sekä asennat sovelluksen riippuvuudet:
+    $ python3 -m venv venv
+    $ source venv/bin/activate
+    $ pip install -r ./requirements.txt
+* Komennolla $ psql < schema.sql määrität sovelluksen vaatiman tietokannan
+* Sovellus käynnistyy komennolla $ psql < schema.sql
