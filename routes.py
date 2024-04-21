@@ -1,5 +1,5 @@
 from app import app
-from flask import render_template, request, redirect
+from flask import render_template, request, redirect, session
 import users, workouts
 
 @app.route("/")
@@ -27,22 +27,38 @@ def logout():
 def select_movements():
     return render_template("select_movements.html")
 
-@app.route("/new_workout", methods=["POST"])
+@app.route("/new_workout", methods=["GET","POST"])
 def new_workout():
-    movements = request.form.getlist("movement")
+    if request.method == "POST":
+        movements = request.form.getlist("movement")
+        session["movements"] = movements
+        date = request.form["date"]
+        if not workouts.new_workout(date):
+            return render_template("error.html", message="Kirjaaminen epäonnistui")
+        for movement in movements:
+            workouts.add_movement(movement)
+    if request.method == "GET":
+        movements = session.get("movements")
     return render_template("new_workout.html", movements=movements)
-
-@app.route("/add_set")
+        
+@app.route("/add_set", methods=["POST"])
 def add_set():
-    return render_template("add_set.html")
+    movement = request.form["movement"]
+    return render_template("add_set.html", movement=movement)
 
 @app.route("/save_set", methods=["POST"])
 def save_set():
-    #repetitions = request.form["repetitions"]
-    #weight = request.form["weight"]
-    #rpe = request.form["rpe"]
-    #workouts.save_set(movement_in_workout_id,repetitions, weight, rpe)
+    movement = request.form["movement"]
+    repetitions = request.form["repetitions"]
+    weight = request.form["weight"]
+    rpe = request.form["rpe"]
+    workouts.save_set(movement, repetitions, weight, rpe)
     return redirect("/new_workout")
+
+@app.route("/save_workout")
+def save_workout():
+    del session["movements"]
+    return redirect("/")
 
 @app.route("/register", methods=["GET", "POST"])
 def register():

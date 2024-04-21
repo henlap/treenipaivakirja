@@ -1,13 +1,28 @@
 from db import db
 import users
-from flask import request
-from sqlalchemy.sql import text
+from flask import request, session
+from sqlalchemy.sql import text, func
 
-def new_workout():
-    movements = request.form.getlist("movement")
-    return movements
+def new_workout(date):
+    user_id = users.user_id()
+    if user_id == 0:
+        return False
+    #try:
+    sql = text("INSERT INTO workouts (user_id, done_at, sent_at) VALUES (:user_id, :done_at, NOW()) RETURNING id")
+    workout_id = db.session.execute(sql,{"user_id":user_id, "done_at": date})
+    session["workout_id"] = workout_id.fetchone()[0]
+    db.session.commit()
+    #except:
+        #return False
+    return True
+    
+def save_set(movement_name, repetitions, weight, rpe):
+    w_id = workout_id()
+    m_id = movement_id(movement_name)
 
-def save_set(movement_in_workout_id,repetitions, weight, rpe=-1):
+    sql = text("SELECT id FROM movement_in_workout WHERE movement_id=:movement_id AND workout_id=:workout_id")
+    result = db.session.execute(sql, {"movement_id":m_id, "workout_id":w_id})
+    movement_in_workout_id = result.fetchone()[0]
     try:
         sql = text("INSERT INTO sets (movement_in_workout_id,repetitions, weight, rpe) VALUES (:movement_in_workout_id,:repetitions, :weight, :rpe)")
         db.session.execute(sql, {"movement_in_workout_id":movement_in_workout_id, "repetitions":repetitions, "weight":weight, "rpe":rpe})
@@ -15,3 +30,23 @@ def save_set(movement_in_workout_id,repetitions, weight, rpe=-1):
     except:
         return False
     return True
+
+def add_set():
+    pass
+
+def add_movement(movement_name):
+    w_id = workout_id()
+    m_id = movement_id(movement_name)
+
+    sql = text("INSERT INTO movement_in_workout (movement_id, workout_id) VALUES (:movement_id, :workout_id)")
+    db.session.execute(sql, {"movement_id":m_id, "workout_id":w_id})
+    db.session.commit()
+
+def workout_id():
+    return session.get("workout_id", 0)
+
+def movement_id(name):
+    sql = text("SELECT id FROM movements WHERE name=:name")
+    result = db.session.execute(sql, {"name":name})
+    return result.fetchone()[0]
+    

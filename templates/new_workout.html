@@ -1,6 +1,19 @@
 Valitut liikkeet:
 <ul>
 {% for movement in movements %}
-<li> {{ movement }}
+<li>{{movement}}
 {% endfor %}
 </ul>
+
+<form action="/add_set" method="POST">
+Lisää sarja liikeeseen:
+<ul>
+{% for movement in movements %}
+<input type="submit" name="movement" value={{movement}}> 
+{% endfor %}
+</ul>
+</form>
+
+<form action="/save_workout">
+<input type="submit" name="save" value="Tallenna treeni">
+</form>
