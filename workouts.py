@@ -49,4 +49,16 @@ def movement_id(name):
     sql = text("SELECT id FROM movements WHERE name=:name")
     result = db.session.execute(sql, {"name":name})
     return result.fetchone()[0]
+
+def get_sets(workout_id):
+    sql = text("""SELECT M.name, S.repetitions, S.weight
+                    FROM sets S, movement_in_workout MW, workouts W, movements M
+                    WHERE W.id=:workout_id  
+                    AND MW.workout_id=W.id
+                    AND MW.movement_id=M.id
+                    AND S.movement_in_workout_id=MW.id
+                    GROUP BY S.id, M.name
+                    ORDER BY M.name""")
+    result = db.session.execute(sql, {"workout_id":workout_id})
+    return result.fetchall()
     

@@ -1,9 +1,10 @@
-Valitut liikkeet:
+Kirjatut sarjat:
 <ul>
-{% for movement in movements %}
-<li>{{movement}}
+{% for set in sets %}
+<li>{{set.name}} toistoja: {{set.repetitions}} paino: {{set.weight}}kg
 {% endfor %}
 </ul>
+Sarjoja lisätty: {{count}}
 
 <form action="/add_set" method="POST">
 Lisää sarja liikeeseen:

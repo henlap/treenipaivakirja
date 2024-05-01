@@ -39,7 +39,11 @@ def new_workout():
             workouts.add_movement(movement)
     if request.method == "GET":
         movements = session.get("movements")
-    return render_template("new_workout.html", movements=movements)
+    
+    workout_id = workouts.workout_id()
+    sets = workouts.get_sets(workout_id)
+    count = len(sets)
+    return render_template("new_workout.html", movements=movements, count=count, sets=sets)
         
 @app.route("/add_set", methods=["POST"])
 def add_set():
@@ -58,6 +62,7 @@ def save_set():
 @app.route("/save_workout")
 def save_workout():
     del session["movements"]
+    del session["workout_id"]
     return redirect("/")
 
 @app.route("/register", methods=["GET", "POST"])
