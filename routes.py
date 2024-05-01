@@ -4,7 +4,9 @@ import users, workouts
 
 @app.route("/")
 def index():
-    return render_template("index.html")
+    user_id = users.user_id()
+    count = workouts.count_workouts(user_id)
+    return render_template("index.html",count=count)
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
@@ -79,3 +81,7 @@ def register():
             return redirect("/")
         else:
             return render_template("error.html", message="Rekisteröinti epäonnistui")
+        
+@app.route("/show_workouts")
+def show_workouts():
+    return render_template("show_workouts.html")

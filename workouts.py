@@ -62,3 +62,12 @@ def get_sets(workout_id):
     result = db.session.execute(sql, {"workout_id":workout_id})
     return result.fetchall()
     
+def count_workouts(user_id):
+    if user_id == 0:
+        return 0
+    sql = text("""SELECT COUNT(W.id)
+                    FROM users U LEFT JOIN workouts W
+                    ON W.user_id=U.id
+                    AND U.id=:user_id""")
+    result = db.session.execute(sql, {"user_id":user_id})
+    return result.fetchone()[0]

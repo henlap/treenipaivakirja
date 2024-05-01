@@ -4,7 +4,8 @@
 <h2>Tervetuloa!</h2>
 <p>Olet kirjautunut sisään.</p>
 <a href="/select_movements">Lisää uusi treeni</a> | <a href="/logout">Kirjaudu ulos</a>
-<p>Kirjattuja treenejä:</p>
+<p>Kirjattuja treenejä:{{count}}kpl</p>
+<a href="/show_workouts">Tarkastele kirjattuja treenejä</a>
 {% else %}
 <a href="/login">Kirjaudu sisään</a>
 {% endif %}
