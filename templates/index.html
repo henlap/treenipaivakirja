@@ -1,5 +1,7 @@
-<title>Treenipäiväkirja</title>
-<h1>Treenipäiväkirja</h1>
+{% extends "layout.html" %}
+{% block title %}Etusivu{% endblock %}
+{% block content %}
+<h2>Etusivu</h2>
 {% if session.user_id %}
 <h2>Tervetuloa!</h2>
 <p>Olet kirjautunut sisään.</p>
@@ -7,5 +9,6 @@
 <p>Kirjattuja treenejä:{{count}}kpl</p>
 <a href="/show_workouts">Tarkastele kirjattuja treenejä</a>
 {% else %}
-<a href="/login">Kirjaudu sisään</a>
+Sovelluksen avulla voit pitää kirjaa kuntosalitreeneistäsi ja seurata kehitystäsi.
 {% endif %}
+{% endblock %}

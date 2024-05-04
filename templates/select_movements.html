@@ -1,3 +1,6 @@
+{% extends "layout.html" %}
+{% block title %}Valitse liikkeet{% endblock %}
+{% block content %}
 <form action="/new_workout" method="POST">
     Valitse liikkeet:
 <p>
@@ -10,4 +13,5 @@
 <input type="date" id="date" name="date" value="date">
 <input type="submit" value="Luo treeni">
 </form>
+{% endblock %}
 
