@@ -92,3 +92,18 @@ def get_movements():
                     ORDER BY M.name""")
     result = db.session.execute(sql)
     return result.fetchall()
+
+def find_maximums(user_id):
+    sql = text("""SELECT name, ROUND(MAX(c),1) AS result
+                    FROM (SELECT M.name, S.weight/( 1.0278 - 0.0278 * S.repetitions ) AS c
+                    FROM movements M, users U, workouts W, movement_in_workout MW, sets S
+                    WHERE U.id=:user_id
+                    AND U.id=W.user_id
+                    AND MW.workout_id=W.id
+                    AND MW.movement_id=M.id
+                    AND S.movement_in_workout_id=MW.id
+                    GROUP BY M.name, S.weight, S.repetitions)
+                    AS X
+                    GROUP BY name""")
+    result = db.session.execute(sql, {"user_id":user_id})
+    return result.fetchall()

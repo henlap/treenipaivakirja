@@ -6,7 +6,8 @@ import users, workouts
 def index():
     user_id = users.user_id()
     count = workouts.count_workouts(user_id)
-    return render_template("index.html",count=count)
+    maximums = workouts.find_maximums(user_id)
+    return render_template("index.html",count=count, maximums=maximums)
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
