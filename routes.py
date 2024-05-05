@@ -84,4 +84,6 @@ def register():
         
 @app.route("/show_workouts")
 def show_workouts():
-    return render_template("show_workouts.html")
+    user_id = users.user_id()
+    all_workouts = workouts.get_workouts(user_id)
+    return render_template("show_workouts.html", all_workouts=all_workouts)
