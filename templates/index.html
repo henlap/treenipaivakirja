@@ -1,15 +1,13 @@
 {% extends "layout.html" %}
 {% block title %}Etusivu{% endblock %}
 {% block content %}
-<h2>Etusivu</h2>
+<h2>Tervetuloa</h2>
 {% if session.user_id %}
-<h2>Tervetuloa!</h2>
-<p>Olet kirjautunut sisään.</p>
 <p>Kirjattuja treenejä:{{count}}kpl</p>
 <ul>
-{% for maximum in maximums%}
-<li>Ennustettu maksimikuorma liikkeessä {{maximum.name}} {{maximum.result}} kg
-{% endfor %}
+    {% for maximum in maximums%}
+    <li>Ennustettu maksimikuorma liikkeessä {{maximum.name}} {{maximum.result}} kg
+    {% endfor %}
 </ul>
 {% else %}
 Treenipäiväkirjan avulla voit pitää kirjaa kuntosalitreeneistäsi ja seurata kehitystäsi.

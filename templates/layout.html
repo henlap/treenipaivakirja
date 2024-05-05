@@ -1,11 +1,50 @@
 <!doctype html>
-<link rel="stylesheet" href="main.css">
 <meta name='viewport' content='width=device-width, initial-scale=1'>
-
-<title>Treenipäiväkirja - {% block title %}{% endblock %}</title>
-<h1>Treenipäiväkirja</h1>
-<a href="/">Etusivu</a>
-<a href="/login">Kirjaudu sisään</a>
-<hr>
-{% block content %}{% endblock %}
-<hr>
+<head>
+   <!-- Due to some difficulties with referencing statistics the style is set here, but preferably it would be done in main.css-file -->
+   <style>
+      body {margin: auto;
+      max-width: 45em;
+      font-family: 'Helvetica', 'Arial', sans-serif;
+      background-color: linen;
+      }
+      .header {
+      background: sandybrown;
+      font-weight: bold;
+      padding: 1em 1em;
+      font-size: 1em;
+      border-radius: .5em;
+      margin-top: .5em;
+      }
+      h1 {
+      color: maroon;
+      margin-left: 40px;
+      }
+      nav li {
+      display: inline-block;
+      padding: 0.5em .5em;
+      }
+      form {
+      padding: .5em;
+      }
+   </style>
+</head>
+<body>
+   <title>Treenipäiväkirja - {% block title %}{% endblock %}</title>
+   <div class="header">
+      <h1>Treenipäiväkirja</h1>
+   </div>
+   <nav>
+      <li><a href="/">Etusivu</a>
+         {% if session.user_id %}
+      <li><a href="/select_movements">Lisää uusi treeni</a></li>
+      <li><a href="/show_workouts">Tarkastele kirjattuja sarjoja</a></li>
+      <li><a href="/logout">Kirjaudu ulos</a></li>
+      {% else %}
+      <li><a href="/login">Kirjaudu sisään</a></li>
+      {% endif %}
+   </nav>
+   <hr>
+   {% block content %}{% endblock %}
+   <hr>
+</body>
