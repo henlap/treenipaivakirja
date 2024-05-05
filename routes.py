@@ -27,7 +27,8 @@ def logout():
 
 @app.route("/select_movements")
 def select_movements():
-    return render_template("select_movements.html")
+    movements = workouts.get_movements()
+    return render_template("select_movements.html", movements=movements)
 
 @app.route("/new_workout", methods=["GET","POST"])
 def new_workout():

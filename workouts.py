@@ -85,3 +85,10 @@ def get_workouts(user_id):
         sets = get_sets(workout[0])
         workouts.append(f"Suoritettu:{workout[1]} {sets}")
     return workouts
+
+def get_movements():
+    sql = text("""SELECT M.name
+                    FROM movements M
+                    ORDER BY M.name""")
+    result = db.session.execute(sql)
+    return result.fetchall()

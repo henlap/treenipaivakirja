@@ -4,10 +4,9 @@
 <form action="/new_workout" method="POST">
     Valitse liikkeet:
 <p>
-<input type="checkbox" name="movement" value="jalkakyykky"> jalkakyykky
-<input type="checkbox" name="movement" value="penkkipunnerrus"> penkkipunnerrus
-<input type="checkbox" name="movement" value="maastaveto"> maastaveto
-<input type="checkbox" name="movement" value="leuanveto"> leuanveto
+{% for movement in movements %}
+<input type="checkbox" name="movement" value={{movement.name}}> {{movement.name}}
+{% endfor %}
 <p>
 <label for="date">Suoritus päivämäärä:</label>
 <input type="date" id="date" name="date" value="date">
