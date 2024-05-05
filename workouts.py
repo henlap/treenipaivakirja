@@ -73,18 +73,17 @@ def count_workouts(user_id):
     return result.fetchone()[0]
 
 def get_workouts(user_id):
-    sql = text("""SELECT W.id, W.done_at
-                    FROM users U LEFT JOIN workouts W
-                    ON W.user_id=U.id
-                    AND U.id=:user_id
-                    GROUP BY W.id, W.done_at
-                    ORDER BY W.done_at""")
+    sql = text("""SELECT W.id, W.done_at, M.name, S.repetitions, S.weight, S.rpe
+                    FROM sets S, movement_in_workout MW, workouts W, movements M
+                    WHERE W.user_id=:user_id
+                    AND W.id=workout_id  
+                    AND MW.workout_id=W.id
+                    AND MW.movement_id=M.id
+                    AND S.movement_in_workout_id=MW.id
+                    GROUP BY W.id, W.done_at, S.id, M.name
+                    ORDER BY W.done_at """)
     result = db.session.execute(sql, {"user_id":user_id})
-    workouts = []
-    for workout in result:
-        sets = get_sets(workout[0])
-        workouts.append(f"Suoritettu:{workout[1]} {sets}")
-    return workouts
+    return result.fetchall()
 
 def get_movements():
     sql = text("""SELECT M.name

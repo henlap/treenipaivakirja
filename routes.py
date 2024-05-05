@@ -79,6 +79,10 @@ def register():
         password2 = request.form["password2"]
         if password1 != password2:
             return render_template("error.html", message="Salasanat eivät täsmää")
+        if len(username) > 25:
+            return render_template("error.html", message="Käyttäjänimi on liian pitkä (maksimipituus 25 merkkiä)")
+        if len(password1) < 8 or len(password1) > 30:
+            return render_template("error.html", message="Salasanan pituuden tulee olla 8-30 merkkiä")
         if users.register(username, password1):
             return redirect("/")
         else:

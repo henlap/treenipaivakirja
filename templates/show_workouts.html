@@ -1,6 +1,10 @@
-Kirjatut treenit suoritusjärjestyksessä:
+{% extends "layout.html" %}
+{% block title %}Kirjatut sarjat{% endblock %}
+{% block content %}
+Kirjatut sarjat suoritusjärjestyksessä:
 <ul>
-{% for workout in all_workouts %}
-<li>{{workout}}
+{% for workout in all_workouts%}
+<li>Suorituspäivämäärä: {{workout.done_at}} Liike: {{workout.name}} Toistoja: {{workout.repetitions}} Paino: {{workout.weight}} Haastavuus: {{workout.rpe}}
 {% endfor %}
 </ul>
+{% endblock %}
