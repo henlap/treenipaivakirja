@@ -1,19 +1,22 @@
-Lisätään sarja liikkeeseen {{movement}}
+{% extends "layout.html" %}
+{% block title %}Lisää sarja{% endblock %}
+{% block content %}
 <form action="/save_set" method="POST">
-<p>
-<input type="checkbox" name="movement" value={{movement}}> {{movement}}
-</p>
-<p>
-<label for="repetitions">Toistoja:</label>
-<input type="number" id="repetitions" name="repetitions" value="repetitions" min="1" max="1000">
-</p>
-<p>
-<label for="weight">Paino:</label>
-<input type="number" id="weight" name="weight" value="weight" min="1" max="1000">kg
-</p>
-<p>
-<label for="rpe">Kuinka haastavalta tuntui (1-10):</label>
-<input type="number" id="rpe" name="rpe" value="rpe" min="1" max="10">
-</p>
-<input type="submit" value="Lisää">
+   <p>
+      <input type="checkbox" name="movement" value={{movement}} required/> Lisätään sarja liikkeeseen {{movement}}
+   </p>
+   <p>
+      <label for="repetitions">Toistoja:</label>
+      <input type="number" id="repetitions" name="repetitions" value="repetitions" min="1" max="1000" required/>
+   </p>
+   <p>
+      <label for="weight">Paino:</label>
+      <input type="number" id="weight" name="weight" value="weight" min="0" max="1000" required/>kg
+   </p>
+   <p>
+      <label for="rpe">Kuinka haastavalta tuntui (1-10):</label>
+      <input type="number" id="rpe" name="rpe" value="rpe" min="1" max="10">
+   </p>
+   <input type="submit" value="Lisää">
 </form>
+{% endblock %}

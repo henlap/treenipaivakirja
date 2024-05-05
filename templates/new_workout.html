@@ -3,22 +3,20 @@
 {% block content %}
 Kirjatut sarjat:
 <ul>
-{% for set in sets %}
-<li>{{set.name}} toistoja: {{set.repetitions}} paino: {{set.weight}}kg
-{% endfor %}
+   {% for set in sets %}
+   <li>{{set.name}} toistoja: {{set.repetitions}} paino: {{set.weight}}kg
+      {% endfor %}
 </ul>
 Sarjoja lisätty: {{count}}
-
 <form action="/add_set" method="POST">
-Lisää sarja liikeeseen:
-<ul>
-{% for movement in movements %}
-<input type="submit" name="movement" value={{movement}}> 
-{% endfor %}
-</ul>
+   Lisää sarja liikeeseen:
+   <ul>
+      {% for movement in movements %}
+      <input type="submit" name="movement" value={{movement}}> 
+      {% endfor %}
+   </ul>
 </form>
-
 <form action="/save_workout">
-<input type="submit" name="save" value="Tallenna treeni">
+   <input type="submit" name="save" value="Tallenna treeni">
 </form>
 {% endblock %}

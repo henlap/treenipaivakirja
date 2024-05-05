@@ -2,15 +2,15 @@
 {% block title %}Valitse liikkeet{% endblock %}
 {% block content %}
 <form action="/new_workout" method="POST">
-    Valitse liikkeet:
-<p>
-{% for movement in movements %}
-<input type="checkbox" name="movement" value={{movement.name}}> {{movement.name}}
-{% endfor %}
-<p>
-<label for="date">Suoritus päivämäärä:</label>
-<input type="date" id="date" name="date" value="date">
-<input type="submit" value="Luo treeni">
+   Valitse liikkeet:
+   <p>
+      {% for movement in movements %}
+      <input type="checkbox" name="movement" value={{movement.name}}> {{movement.name}}
+      {% endfor %}
+   <p>
+      <label for="date">Suoritus päivämäärä:</label>
+      <input type="date" id="date" name="date" value="date" required />
+      <input type="submit" value="Luo treeni">
 </form>
 {% endblock %}
 

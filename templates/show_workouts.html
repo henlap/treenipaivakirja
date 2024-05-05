@@ -3,8 +3,8 @@
 {% block content %}
 Kirjatut sarjat suoritusjärjestyksessä:
 <ul>
-{% for workout in all_workouts%}
-<li>Suorituspäivämäärä: {{workout.done_at}} Liike: {{workout.name}} Toistoja: {{workout.repetitions}} Paino: {{workout.weight}} Haastavuus: {{workout.rpe}}
-{% endfor %}
+   {% for workout in all_workouts %}
+   <li>Suorituspäivämäärä: {{workout.done_at}} Liike: {{workout.name}} Toistoja: {{workout.repetitions}} Paino: {{workout.weight}} Haastavuus: {{workout.rpe}}
+      {% endfor %}
 </ul>
 {% endblock %}
